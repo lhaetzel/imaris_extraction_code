@@ -12,11 +12,11 @@ Results = []
 for i in range(len(folder_list)):
     #generate path to statistics folder for cell of interest
     cell_statistics = path + '/' + folder_list[i]
-    
+
     #read csv file
-    Spine_Length_path = os.path.abspath(os.path.join(cell_statistics, 'Spine_Length.csv'))
+    Spine_Orientation_Angle_path = os.path.abspath(os.path.join(cell_statistics, 'Spine_Orientation_Angle.csv'))
     row_list = []
-    with open(Spine_Length_path) as csvfile:
+    with open(Spine_Orientation_Angle_path) as csvfile:
         readCSV = csv.reader(csvfile, delimiter=',')
         for row in readCSV:
             row_list.append(row)
@@ -30,18 +30,18 @@ for i in range(len(folder_list)):
     #delete column headers
     reformat_row_list.remove(reformat_row_list[0])
 
-    #extract the spine length values from csv file and convert ehm to floats
-    Spine_Length_List = []
+    #extract the spine length values from csv file and convert them to floats
+    Spine_Orientation_Angle_List = []
     for sublist in reformat_row_list:
-        spine_length = float(sublist[0])
-        Spine_Length_List.append(spine_length)
+        spine_orientation_angle = float(sublist[0])
+        Spine_Orientation_Angle_List.append(spine_orientation_angle)
 
     #calculate average spine length, attribute it to cell number and append to results list
-    Average_Spine_Length = sum(Spine_Length_List)/len(Spine_Length_List)
-    Output= [folder_list[i][1:-11], Average_Spine_Length] #folder list indexed so cell number appears as number
+    Average_Spine_Orientation_Angle = sum(Spine_Orientation_Angle_List)/len(Spine_Orientation_Angle_List)
+    Output= [folder_list[i][1:-11], Average_Spine_Orientation_Angle] #folder list indexed so cell number appears as number
     Results.append(Output)
 
-#convert to excel spreadsheet via pandas dataframe and save
-Spine_Length_df=pd.DataFrame(Results)
-Spine_Length_df.columns = ['Cell Number', 'Spine Length Mean']
-Spine_Length_df.to_excel(r'/Users/lhaetzel/Desktop/Grad School/Rotations/Bateup Lab/Imaris_Export/Spine_Length.xlsx', index = False)
+    #convert to excel spreadsheet via pandas dataframe and save
+Spine_Orientation_Angle_df=pd.DataFrame(Results)
+Spine_Orientation_Angle_df.columns = ['Cell Number', 'Spine Orientation Angle Mean']
+Spine_Orientation_Angle_df.to_excel(r'/Users/lhaetzel/Desktop/Grad School/Rotations/Bateup Lab/Imaris_Export/Spine_Orientation_Angle.xlsx', index = False)

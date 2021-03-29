@@ -48,7 +48,8 @@ WTD2_pos_Results = []
 #generate list of folders in directory (one folder per cell analyzed)
 path= r'/Users/lhaetzel/Documents/Imaris_Statistics'
 folder_list = os.listdir(path)
-#folder_list.remove('.DS_Store') #sometimes this is not needed
+if '.DS_Store' in folder_list:
+    folder_list.remove('.DS_Store') #sometimes this is not needed
 
 #loop over each folder (one for each cell) in imaris output folder
 for i in range(len(folder_list)):
@@ -77,8 +78,6 @@ for i in range(len(folder_list)):
     for sublist in reformat_row_list:
         spine_head_diameter = float(sublist[1])
         Spine_Head_Diameter_List.append(spine_head_diameter)
-        if spine_head_diameter < 0.2:
-            print(folder_list[i][1:-11])
     
     #sort values into correct list by genotype using cell number in folder name
     if folder_list[i][1:-11] in HETD2_neg_List:

@@ -4,10 +4,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 #import PCA data
-pca_df = pd.read_excel(r'/Users/lhaetzel/Desktop/Grad School/Rotations/Bateup Lab/Imaris_Export/average_by_cell/average_values_compiled.xlsx')
+pca_df = pd.read_excel(r'/Users/lhaetzel/Desktop/Grad School/Rotations/Bateup Lab/Imaris_Export/individual_spines/individual_spine_values_compiled.xlsx')
 
-features = ['spine_density','spine_area_mean','spine_part_length_ground','spine_part_length_ground','spine_part_length_head','spine_part_length_neck','spine_part_diameter_ground','spine_part_diameter_head','spine_part_diameter_neck','spine_volume_mean']
-
+features = ['Spine Area','Spine Orientation Angle','Spine Part Mean Diameter Ground','Spine Part Mean Diameter Head','Spine Part Mean Diameter Neck','Spine Part Length Ground','Spine Part Length Head','Spine Part Length Neck','Spine Straightness','Spine Volume']
 # Separating out the features
 x = pca_df.loc[:, features].values
 
@@ -33,9 +32,9 @@ fig = plt.figure(figsize = (8,8))
 ax = fig.add_subplot(1,1,1) 
 ax.set_xlabel('Principal Component 1', fontsize = 15)
 ax.set_ylabel('Principal Component 2', fontsize = 15)
-ax.set_title('Het iSPN vs. WT iSPN (all spine features)', fontsize = 20)
-targets = [ 'HETD2+']
-colors = ['r', 'b']
+ax.set_title('WT iSPN', fontsize = 20)
+targets = [ 'WTD2+']
+colors = ['b','r']
 for target, color in zip(targets,colors):
     indicesToKeep = finalDf['genotype'] == target
     ax.scatter(finalDf.loc[indicesToKeep, 'principal component 1']
@@ -45,4 +44,4 @@ for target, color in zip(targets,colors):
 ax.legend(targets)
 
 
-#fig.savefig('/Users/lhaetzel/Desktop/Grad School/Rotations/Bateup Lab/python_spine_analyses/dSPN_allfeatures.png')
+fig.savefig('/Users/lhaetzel/Desktop/Grad School/Rotations/Bateup Lab/python_spine_analyses/WT_iSPN_individual_spines_allfeatures.png')

@@ -5,7 +5,7 @@ import pandas as pd
 #generate list of folders in directory (one folder per cell analyzed)
 path= r'/Users/lhaetzel/Documents/Imaris_Statistics'
 folder_list = os.listdir(path)
-#folder_list.remove('.DS_Store')  - N/A
+folder_list.remove('.DS_Store') # sometimes N/A
 
 #loop over each cell analyzed and calculate average spine length
 Results = []

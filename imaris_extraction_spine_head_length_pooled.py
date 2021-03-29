@@ -47,7 +47,7 @@ WTD2_pos_Results = []
 #generate list of folders in directory (one folder per cell analyzed)
 path= r'/Users/lhaetzel/Documents/Imaris_Statistics'
 folder_list = os.listdir(path)
-#folder_list.remove('.DS_Store') #sometimes this is not needed
+folder_list.remove('.DS_Store') #sometimes this is not needed
 
 for i in range(len(folder_list)):
     #generate path to statistics folder for cell of interest
@@ -81,19 +81,19 @@ for i in range(len(folder_list)):
     #sort values into correct list by genotype using cell number in folder name
     if folder_list[i][1:-11] in HETD2_neg_List:
         HETD2_neg_Results.extend(Spine_Head_Length_List)
-        print('HETD2-')
+        
     
     elif folder_list[i][1:-11] in HETD2_pos_List:
         HETD2_pos_Results.extend(Spine_Head_Length_List)
-        print('HETD2+')
+       
 
     elif folder_list[i][1:-11] in WTD2_neg_List:
         WTD2_neg_Results.extend(Spine_Head_Length_List)
-        print('WTD2-')
+        
 
     elif folder_list[i][1:-11] in WTD2_pos_List:
         WTD2_pos_Results.extend(Spine_Head_Length_List)
-        print('WTD2+')
+        
 
 #convert to dataframe, add NaN where lists have different lengths, export to excel
 Results_df = pd.DataFrame({'HETD2-': pd.Series(HETD2_neg_Results), 'HETD2+': pd.Series(HETD2_pos_Results), 'WTD2-': pd.Series(WTD2_neg_Results), 'WTD2+' : pd.Series(WTD2_pos_Results)})
